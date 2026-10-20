@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exam Result | OnlineCourse</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <main class="container py-5" style="max-width: 900px">
+    <div class="text-center mb-4">
+      {% if score == total %}
+      <h1 class="text-success">Congratulations!</h1>
+      <p class="lead">You successfully completed the mock exam.</p>
+      {% else %}
+      <h1>Exam complete</h1>
+      <p class="lead">Review your answers below and try again.</p>
+      {% endif %}
+      <div class="display-6 fw-bold">Score: {{ score }} / {{ total }}</div>
+      <div class="text-secondary">{{ percentage }}%</div>
+    </div>
+    <section class="card shadow-sm">
+      <div class="card-header"><h2 class="h4 mb-0">Exam results</h2></div>
+      <div class="list-group list-group-flush">
+        {% for result in results %}
+        <div class="list-group-item">
+          <div class="fw-semibold">{{ forloop.counter }}. {{ result.question.content }}</div>
+          <div class="{% if result.selected.is_correct %}text-success{% else %}text-danger{% endif %}">
+            Your answer: {{ result.selected.content|default:"Not answered" }}
+          </div>
+          {% if not result.selected.is_correct %}
+          <div class="text-success">Correct answer: {{ result.correct.content }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>

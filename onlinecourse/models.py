@@ -1,9 +1,5 @@
-from django.db import models
-
-# Create your models here.
-
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Course(models.Model):
@@ -18,7 +14,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
-        related_name="lessons"
+        related_name="lessons",
     )
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True)
@@ -31,7 +27,7 @@ class Question(models.Model):
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
-        related_name="questions"
+        related_name="questions",
     )
     content = models.CharField(max_length=500)
     grade = models.IntegerField(default=1)
@@ -44,7 +40,7 @@ class Choice(models.Model):
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
-        related_name="choices"
+        related_name="choices",
     )
     content = models.CharField(max_length=300)
     is_correct = models.BooleanField(default=False)
@@ -57,12 +53,12 @@ class Submission(models.Model):
     exam = models.ForeignKey(
         Lesson,
         on_delete=models.CASCADE,
-        related_name="submissions"
+        related_name="submissions",
     )
     student = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="exam_submissions"
+        related_name="exam_submissions",
     )
     choices = models.ManyToManyField(Choice)
     submitted_at = models.DateTimeField(auto_now_add=True)

@@ -1,11 +1,8 @@
-
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User, Group
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import GroupAdmin
+from django.contrib.auth.admin import GroupAdmin, UserAdmin
+from django.contrib.auth.models import Group, User
 
-from .models import Course, Lesson, Question, Choice, Submission
+from .models import Choice, Course, Lesson, Question, Submission
 
 
 class ChoiceInline(admin.TabularInline):
@@ -19,31 +16,30 @@ class QuestionInline(admin.StackedInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("question_text", "lesson", "marks")
-    list_filter = ("lesson",)
-    search_fields = ("question_text",)
+    list_display = ("content", "course", "grade")
+    list_filter = ("course",)
+    search_fields = ("content",)
     inlines = [ChoiceInline]
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ("title", "course", "order")
+    list_display = ("title", "course")
     list_filter = ("course",)
     search_fields = ("title",)
-    inlines = [QuestionInline]
 
 
-@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
 
 
-@admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "course", "score", "total_questions", "submitted_at")
-    list_filter = ("course", "submitted_at")
-    search_fields = ("user__username", "course__name")
+    list_display = ("student", "exam", "submitted_at")
+    list_filter = ("exam", "submitted_at")
+    search_fields = ("student__username", "exam__title")
 
 
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Submission, SubmissionAdmin)

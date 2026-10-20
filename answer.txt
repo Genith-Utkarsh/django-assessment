@@ -1,0 +1,20 @@
+Question 1:
+https://github.com/Genith-Utkarsh/django-assessment/blob/main/onlinecourse/models.py
+
+Question 2:
+https://github.com/Genith-Utkarsh/django-assessment/blob/main/onlinecourse/admin.py
+
+Question 3:
+Upload: 03-admin-site.png
+
+Question 4:
+https://github.com/Genith-Utkarsh/django-assessment/blob/main/onlinecourse/templates/onlinecourse/course_details_bootstrap.html
+
+Question 5:
+https://github.com/Genith-Utkarsh/django-assessment/blob/main/onlinecourse/views.py
+
+Question 6:
+https://github.com/Genith-Utkarsh/django-assessment/blob/main/courseapp/urls.py
+
+Question 7:
+Upload: 07-final.png
